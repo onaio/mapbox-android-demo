@@ -63,12 +63,14 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
           .include(new LatLng(37.6744, -119.6815)) // Southwest
           .build();
 
+        latLngBounds = getCustomBounds();
+
         // Define the offline region
         OfflineTilePyramidRegionDefinition definition = new OfflineTilePyramidRegionDefinition(
           mapboxMap.getStyleUrl(),
           latLngBounds,
-          10,
-          20,
+          0.0,
+          20.0,
           SimpleOfflineMapActivity.this.getResources().getDisplayMetrics().density);
 
         // Set the metadata
@@ -238,5 +240,15 @@ public class SimpleOfflineMapActivity extends AppCompatActivity {
 
     // Show a toast
     Toast.makeText(SimpleOfflineMapActivity.this, message, Toast.LENGTH_LONG).show();
+  }
+
+  private LatLngBounds getCustomBounds() {
+
+    double latNorth = 37.7897;
+    double lonWest = -119.5073;
+    double lonEast = -109.6815;
+    double latSouth = 27.6744;
+
+    return LatLngBounds.from(latNorth, lonEast, latSouth, lonWest);
   }
 }
